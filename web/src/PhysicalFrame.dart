@@ -43,4 +43,9 @@ class PhysicalFrame {
   int getStatus() {
     return status;
   }
+
+  Process getProcess() {
+    return process;
+  }
 }
+

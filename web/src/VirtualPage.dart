@@ -43,4 +43,8 @@ class VirtualPage {
   int getStatus() {
     return status;
   }
+
+  Process getProcess() {
+    return process;
+  }
 }
