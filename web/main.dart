@@ -12,6 +12,6 @@ void main() {
   VirtualMemory.toHtml();
   PhysicalMemory(18, 4096);
   PhysicalMemory.toHtml();
-  var processes = ProcessMgr(20);
+  var processes = ProcessMgr(30);
   processes.toHtml();
 }

@@ -40,7 +40,25 @@ class VirtualMemory {
         alockQnt++;
       }
     }
-    PhysicalMemory.alockProcess(index, alockQnt);
+    if (alockQnt == 0) {
+      var logTable = querySelector('#logsTable');
+      var newLog = DivElement();
+      newLog.className =
+          "w-full h-7 border-2 border-t-0 border-gray gap-1 bg-green-100";
+      newLog.text = 'Process $index is completed!';
+      logTable.append(newLog);
+
+      var runBtn = querySelector('#runBtn${index}');
+      if (runBtn.text == "Running") {
+        runBtn.text = "Ended";
+        runBtn.className = "w-full h-full bg-black text-white";
+        runBtn.onClick.listen((event) {
+          var i = 4;
+        });
+      }
+    } else {
+      PhysicalMemory.alockProcess(index, alockQnt);
+    }
   }
 
   static void removeProcess(int index) {
@@ -49,6 +67,7 @@ class VirtualMemory {
       if (vMap[i].getProcess()?.getId() == index) {
         vMap[i] = VirtualPage(pageSize, nBits);
         count++;
+        elements--;
       }
     }
     toHtml();
