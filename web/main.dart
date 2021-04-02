@@ -8,7 +8,7 @@ import 'src/ProcessMgr.dart';
 import 'src/VirtualMemory.dart';
 
 void main() {
-  VirtualMemory(18, 4096);
+  VirtualMemory(20, 4096);
   VirtualMemory.toHtml();
   PhysicalMemory(18, 4096);
   PhysicalMemory.toHtml();
