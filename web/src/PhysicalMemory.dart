@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:html';
 import 'dart:math' as math;
 import 'Log.dart';
+import 'PageTable.dart';
 import 'PhysicalFrame.dart';
 import 'Process.dart';
 import 'ProcessMgr.dart';
@@ -26,9 +27,10 @@ class PhysicalMemory {
   //   pMap[index] = vp;
   // }
 
-  static void alockProcess(int index, int alockQnt) {
+  static void alockProcess(int index, int alockQnt, List virtualAdresses) {
     var process = ProcessMgr.processes[index];
     var initialAlockQnt = alockQnt;
+    var virAdressInx = 0;
     while (alockQnt > 0) {
       if ((pFrames - elements) < alockQnt) {
         Log.createLog(
@@ -42,17 +44,15 @@ class PhysicalMemory {
       var i = math.Random().nextInt(pFrames + 1);
       if (getPhysicalFrame(i)?.getStatus() == 0) {
         getPhysicalFrame(i).setProcess(process);
+        PageTable.createLink(virtualAdresses[virAdressInx], i);
         elements++;
         alockQnt--;
+        virAdressInx++;
       }
     }
 
     toHtmlProcess(index);
-    runProcess(
-      index,
-      process,
-      initialAlockQnt-alockQnt
-    );
+    runProcess(index, process, initialAlockQnt - alockQnt);
   }
 
   static void runProcess(int index, Process process, int timesToRemove) {

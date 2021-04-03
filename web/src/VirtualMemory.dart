@@ -1,6 +1,7 @@
 import 'dart:html';
 import 'dart:math' as math;
 import 'Log.dart';
+import 'PageTable.dart';
 import 'PhysicalMemory.dart';
 import 'ProcessMgr.dart';
 import 'VirtualPage.dart';
@@ -36,8 +37,10 @@ class VirtualMemory {
   static void runProcess(int index) {
     var process = ProcessMgr.processes[index];
     var alockQnt = 0;
+    var virtualAdresses = [];
     for (var i = 1; i <= vPages && alockQnt < 4; i++) {
       if (getVirtualPage(i).getProcess() == process) {
+        virtualAdresses.add(i);
         alockQnt++;
       }
     }
@@ -52,17 +55,19 @@ class VirtualMemory {
         runBtn.className = 'w-full h-full bg-black text-white';
       }
     } else {
-      PhysicalMemory.alockProcess(index, alockQnt);
+      PhysicalMemory.alockProcess(index, alockQnt, virtualAdresses);
     }
   }
 
-  static void removeProcess(int index, int timesToRemove) {
+  static void removeProcess(
+      int index, int timesToRemove) {
     var count = 0;
     for (var i = 1; i <= vPages && count < timesToRemove; i++) {
       if (vMap[i].getProcess()?.getId() == index) {
         vMap[i] = VirtualPage(pageSize, nBits);
         count++;
         elements--;
+        PageTable.removeLink(i, PageTable.links[i]);
       }
     }
     toHtml();
