@@ -1,5 +1,5 @@
-name: quickstart
-description: An absolute bare-bones web app.
+name: OSMemoryMgmt
+description: This software simulates the memory management made by the operating system.
 # version: 1.0.0
 #homepage: https://www.example.com
 
