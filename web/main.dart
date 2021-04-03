@@ -15,7 +15,7 @@ void main() {
   VirtualMemory.toHtml();
   PhysicalMemory(18, 4096);
   PhysicalMemory.toHtml();
-  ProcessMgr(5);
+  ProcessMgr(10);
   ProcessMgr.toHtml();
   createButtons();
 }
