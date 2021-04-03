@@ -10,7 +10,7 @@ import 'src/VirtualMemory.dart';
 void main() {
   VirtualMemory(20, 4096);
   VirtualMemory.toHtml();
-  PhysicalMemory(18, 4096);
+  PhysicalMemory(17, 4096);
   PhysicalMemory.toHtml();
   var processes = ProcessMgr(30);
   processes.toHtml();

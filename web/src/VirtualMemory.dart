@@ -1,5 +1,6 @@
 import 'dart:html';
 import 'dart:math' as math;
+import 'Log.dart';
 import 'PhysicalMemory.dart';
 import 'ProcessMgr.dart';
 import 'VirtualPage.dart';
@@ -41,29 +42,23 @@ class VirtualMemory {
       }
     }
     if (alockQnt == 0) {
-      var logTable = querySelector('#logsTable');
-      var newLog = DivElement();
-      newLog.className =
-          "w-full h-7 border-2 border-t-0 border-gray gap-1 bg-green-100";
-      newLog.text = 'Process $index is completed!';
-      logTable.append(newLog);
+      Log.createLog(
+          'w-full h-7 border-2 border-t-0 border-gray gap-1 bg-green-100',
+          'Process $index is completed!');
 
-      var runBtn = querySelector('#runBtn${index}');
-      if (runBtn.text == "Running") {
-        runBtn.text = "Ended";
-        runBtn.className = "w-full h-full bg-black text-white";
-        runBtn.onClick.listen((event) {
-          var i = 4;
-        });
+      var runBtn = querySelector('#runBtn$index');
+      if (runBtn.text == 'Running' || runBtn.text == 'Run') {
+        runBtn.text = 'Ended';
+        runBtn.className = 'w-full h-full bg-black text-white';
       }
     } else {
       PhysicalMemory.alockProcess(index, alockQnt);
     }
   }
 
-  static void removeProcess(int index) {
+  static void removeProcess(int index, int timesToRemove) {
     var count = 0;
-    for (var i = 1; i <= vPages && count < 4; i++) {
+    for (var i = 1; i <= vPages && count < timesToRemove; i++) {
       if (vMap[i].getProcess()?.getId() == index) {
         vMap[i] = VirtualPage(pageSize, nBits);
         count++;
@@ -92,16 +87,16 @@ class VirtualMemory {
     vMap.forEach((k, v) {
       var virtualPageDiv = DivElement();
       virtualPageDiv.className =
-          "flex flex-col w-full h-12 border-2 border-gray text-center ml-0 justify-between";
+          'flex flex-col w-full h-12 border-2 border-gray text-center ml-0 justify-between';
       if (v.getStatus() == 0) {
-        virtualPageDiv.text = '${k} - FREE';
+        virtualPageDiv.text = '$k - FREE';
       } else {
         var backgroundBar = DivElement();
         backgroundBar.style.backgroundColor = v.getProcess().getColor();
-        backgroundBar.className = "h-full w-full";
+        backgroundBar.className = 'h-full w-full';
         backgroundBar.id = 'vDB${v.getProcess().getId()}';
 
-        virtualPageDiv.text = '${k} | Pr-${v.getProcess().getId()}';
+        virtualPageDiv.text = '$k | Pr-${v.getProcess().getId()}';
         virtualPageDiv.id = 'vD${v.getProcess().getId()}';
         virtualPageDiv.append(backgroundBar);
       }
