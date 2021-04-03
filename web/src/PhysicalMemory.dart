@@ -28,12 +28,9 @@ class PhysicalMemory {
 
   static void alockProcess(int index, int alockQnt) {
     var process = ProcessMgr.processes[index];
-    print((pFrames - elements));
     var initialAlockQnt = alockQnt;
     while (alockQnt > 0) {
-      print((pFrames - elements) < alockQnt);
       if ((pFrames - elements) < alockQnt) {
-        print(123123123);
         Log.createLog(
             'w-full h-7 border-2 border-t-0 border-gray gap-1 bg-yellow-200',
             'There is no physical space for P-$index.');
@@ -44,7 +41,6 @@ class PhysicalMemory {
       }
       var i = math.Random().nextInt(pFrames + 1);
       if (getPhysicalFrame(i)?.getStatus() == 0) {
-        print("alocou");
         getPhysicalFrame(i).setProcess(process);
         elements++;
         alockQnt--;
