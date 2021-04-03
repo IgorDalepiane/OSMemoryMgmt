@@ -43,6 +43,9 @@ class PhysicalMemory {
       }
       var i = math.Random().nextInt(pFrames + 1);
       if (getPhysicalFrame(i)?.getStatus() == 0) {
+        var alockToRunBtn = querySelector('#runBtn$index');
+        alockToRunBtn.text = 'Running';
+        alockToRunBtn.className = 'w-full h-full bg-red-200';
         getPhysicalFrame(i).setProcess(process);
         PageTable.createLink(virtualAdresses[virAdressInx], i);
         elements++;
