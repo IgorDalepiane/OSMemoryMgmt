@@ -17,6 +17,8 @@ class ProcessMgr {
   static void createProcess() {
     processes[processes.length + 1] =
         Process(math.Random().nextInt(131072), processes.length + 1);
+    var pTable = querySelector('#processesTable');
+    pTable.scrollTop =pTable.scrollHeight;
     toHtmlOne(processes.length,processes[processes.length]);
   }
 
