@@ -30,8 +30,19 @@ The purpose of this software is to simulate the management of both virtual and p
 2. Install dependencies
     ```sh
     dart pub get
+
+3. Install webdev 
+    ```sh
+    dart pub global activate webdev
     ```
-3. Run webdev
+    If you are in Windows:
+4.  Add to your PATH
+    ```sh
+    C:\Users\YourUserName\AppData\Local\Pub\Cache\bin
+    ```
+5. Re-open your console
+
+6. Run webdev
     ```sh
     webdev serve
     ```
