@@ -43,7 +43,7 @@ void createButtons() {
       simulate();
     }
   });
-  actions.append(simulateBtn);
+  actions!.append(simulateBtn);
 
   var createProcessBtn = ButtonElement();
   createProcessBtn.className = 'w-2/3 h-7 border-2 ml-0 bg-blue-300';
@@ -51,16 +51,16 @@ void createButtons() {
   createProcessBtn.id = 'createProcessBtn';
   createProcessBtn.onClick.listen((event) {
     var simulateBtn = querySelector('#simulateBtn');
-    if (simulateBtn.text == 'Ended') {
-      simulateBtn.className = 'w-2/3 h-7 border-2 ml-0 bg-yellow-200';
-      simulateBtn.text = 'Continue';
+    if (simulateBtn!.text == 'Ended') {
+      simulateBtn!.className = 'w-2/3 h-7 border-2 ml-0 bg-yellow-200';
+      simulateBtn!.text = 'Continue';
     }
     ProcessMgr.createProcess();
     Log.createLog(
         'w-full h-7 border-2 border-t-0 border-gray gap-1 bg-green-300 ',
         'Process created!');
   });
-  actions.append(createProcessBtn);
+  actions!.append(createProcessBtn);
 }
 
 void simulate() {
@@ -69,16 +69,16 @@ void simulate() {
     if (stop == 0) {
       if (count == ProcessMgr.processes.length) {
         var simulateBtn = querySelector('#simulateBtn');
-        simulateBtn.className = 'w-2/3 h-7 border-2 ml-0 bg-black text-white';
-        simulateBtn.text = 'Ended';
+        simulateBtn!.className = 'w-2/3 h-7 border-2 ml-0 bg-black text-white';
+        simulateBtn!.text = 'Ended';
         timer.cancel();
       }
       print(count);
       var button = querySelector('#alockBtn$count');
-      button.click();
+      button!.click();
 
       var buttonRun = querySelector('#runBtn$count');
-      buttonRun.click();
+      buttonRun!.click();
 
       count++;
       lastCycle = count;
